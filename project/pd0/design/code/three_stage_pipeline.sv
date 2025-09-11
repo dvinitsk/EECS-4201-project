@@ -42,5 +42,49 @@ parameter int DWIDTH = 8)(
      * and set up the necessary connections
      *
      */
+//Wire declarations
+logic [DWIDTH-1:0] op1_reg_out;
+logic [DWIDTH-1:0] stage1_alu_out;
+logic [DWIDTH-1:0] sum_reg_out;
+logic [DWIDTH-1:0] stage2_alu_out;
 
+//Module instantiations for ALU and registers
+reg_rst #(.DWIDTH(DWIDTH)) reg_op1(
+  .clk (clk),
+  .rst (rst),
+  .in_i (op1_i),
+  .out_o (op1_reg_out)
+);
+
+alu #(.DWIDTH(DWIDTH)) alu_add( 
+  .sel_i (ADD),
+  .op1_i (op1_i),
+  .op2_i (op2_i),
+  .res_o (stage1_alu_out),
+  .zero_o (),
+  .neg_o ()
+);
+
+reg_rst #(.DWIDTH(DWIDTH)) reg_sum(
+  .clk (clk),
+  .rst (rst),
+  .in_i (stage1_alu_out),
+  .out_o (sum_reg_out)
+);
+
+alu #(.DWIDTH(DWIDTH)) alu_sub(
+  .sel_i (SUB),
+  .op1_i (sum_reg_out),
+  .op2_i (op1_reg_out),
+  .res_o (stage2_alu_out),
+  .zero_o (),
+  .neg_o ()
+);
+
+reg_rst #(.DWIDTH(DWIDTH)) reg_sub(
+  .clk (clk),
+  .rst (rst),
+  .in_i (stage2_alu_out),
+  .out_o (res_o)
+);
 endmodule: three_stage_pipeline

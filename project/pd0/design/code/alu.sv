@@ -35,4 +35,25 @@ module alu #(
      * student below...
      */
 
+    /*ADD = 2'b00,
+      SUB = 2'b01,
+      AND = 2'b10,
+      OR =  2'b11*/
+    always_comb begin
+      if (sel_i == ADD) begin
+        res_o =  op1_i + op2_i;
+      end else if(sel_i == SUB) begin
+        res_o =  op1_i - op2_i;
+      end else if(sel_i == AND) begin
+        res_o =  op1_i & op2_i;
+      end else if(sel_i == OR) begin
+        res_o =  op1_i | op2_i;
+      end else begin
+        res_o = '0;  // Default case
+      end
+      
+      neg_o = res_o[DWIDTH-1] == 1;
+      zero_o = (res_o == 0);
+
+    end
 endmodule: alu
