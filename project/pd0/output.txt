@@ -12,6 +12,7 @@ cd /home/parallels/github/EECS-4201-project/project/pd0/verif/sim/verilator/test
 	--Mdir /home/parallels/github/EECS-4201-project/project/pd0/verif/sim/verilator/test_pd \
 	+define+VCD_FILE=\"test_pd0.vcd\" \
 	+define+MEM_PATH_TO_PROGRAM="\"\""
+<<<<<<< HEAD
 make: Leaving directory '/home/parallels/github/EECS-4201-project/project/pd0/verif/scripts'
 make: Entering directory '/home/parallels/github/EECS-4201-project/project/pd0/verif/scripts'
 echo Verilator Compilation
@@ -55,6 +56,11 @@ echo "" > Vtop__ALL.verilator_deplist.tmp
 Archive ar -rcs Vtop__ALL.a Vtop__ALL.o
 g++     test_pd.o verilated.o verilated_dpi.o verilated_vcd_c.o verilated_threads.o Vtop__ALL.a    -pthread -lpthread -latomic   -o Vtop
 rm Vtop__ALL.verilator_deplist.tmp
+=======
+make -C /home/parallels/github/EECS-4201-project/project/pd0/verif/sim/verilator/test_pd -f Vtop.mk Vtop
+make[1]: Entering directory '/home/parallels/github/EECS-4201-project/project/pd0/verif/sim/verilator/test_pd'
+make[1]: 'Vtop' is up to date.
+>>>>>>> e2ce545 ( Included an output.txt file, this is the output of test_pd.sv)
 make[1]: Leaving directory '/home/parallels/github/EECS-4201-project/project/pd0/verif/sim/verilator/test_pd'
 echo Verilator Run
 Verilator Run
