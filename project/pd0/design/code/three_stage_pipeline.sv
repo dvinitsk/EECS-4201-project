@@ -44,6 +44,7 @@ parameter int DWIDTH = 8)(
      */
 //Wire declarations
 logic [DWIDTH-1:0] op1_reg_out;
+logic [DWIDTH-1:0] op2_reg_out;
 logic [DWIDTH-1:0] stage1_alu_out;
 logic [DWIDTH-1:0] sum_reg_out;
 logic [DWIDTH-1:0] stage2_alu_out;
@@ -56,10 +57,17 @@ reg_rst #(.DWIDTH(DWIDTH)) reg_op1(
   .out_o (op1_reg_out)
 );
 
+reg_rst #(.DWIDTH(DWIDTH)) reg_op2(
+  .clk (clk),
+  .rst (rst),
+  .in_i (op2_i),
+  .out_o (op2_reg_out)
+);
+
 alu #(.DWIDTH(DWIDTH)) alu_add( 
   .sel_i (ADD),
-  .op1_i (op1_i),
-  .op2_i (op2_i),
+  .op1_i (op1_reg_out),
+  .op2_i (op2_reg_out),
   .res_o (stage1_alu_out),
   .zero_o (),
   .neg_o ()

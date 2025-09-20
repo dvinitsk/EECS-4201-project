@@ -154,7 +154,6 @@ module top;
     end
 `endif
 
-
  `ifdef VCD
   initial begin
     $dumpfile(`VCD_FILE);
