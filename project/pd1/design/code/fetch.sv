@@ -24,6 +24,18 @@ module fetch #(
 	output logic [AWIDTH - 1:0] pc_o,
     output logic [DWIDTH - 1:0] insn_o
 );
+
+
+always_ff @(posedge clk) begin
+  if(rst) begin
+    pc_o <= AWIDTH'(BASEADDR);
+    insn_o <= '0;
+  end else begin
+    pc_o <= pc_o + AWIDTH'(32'd4);
+    insn_o <= insn_o;
+  end 
+end 
+
     /*
      * Process definitions to be filled by
      * student below...
