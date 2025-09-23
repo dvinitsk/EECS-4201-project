@@ -50,6 +50,32 @@ module memory #(
     end
     $display("IMEMORY: Loaded %0d 32-bit words from %s", `LINE_COUNT, `MEM_PATH);
   end
+// -------------------------
+// Combinational READ PATH
+// -------------------------
+always_comb begin
+  if (read_en_i) begin
+    // little-endian: lowest-addressed byte is least significant
+    data_o = {
+      main_memory[address + 32'd3],
+      main_memory[address + 32'd2],
+      main_memory[address + 32'd1],
+      main_memory[address + 32'd0]
+    };
+  end else begin
+    data_o = '0;
+  end
+end
+
+// -------------------------
+// Sequential WRITE PATH
+// -------------------------
+// Writes a single byte (data_i[7:0]) at 'address' on the rising edge.
+always_ff @(posedge clk) begin
+  if (write_en_i) begin
+    main_memory[address] <= data_i[7:0];
+  end
+end
 
   /*
    * Process definitions to be filled by
