@@ -12,11 +12,17 @@ module clockgen(
   output logic clk,
   output logic rst
 );
-
+/*
+  initial begin
+    clk = 0;
+    forever #1 clk = !clk;
+  end */
+  `ifndef VERILATOR
   initial begin
     clk = 0;
     forever #1 clk = !clk;
   end
+  `endif
 
   // common logic for iverilog and verilator
   integer counter = 0;

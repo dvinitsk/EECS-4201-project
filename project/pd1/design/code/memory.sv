@@ -32,16 +32,14 @@ module memory #(
   // outputs
   output logic [DWIDTH-1:0] data_o
 );
-
-  logic [DWIDTH-1:0] temp_memory [0:`MEM_DEPTH];
-  // Byte-addressable memory
-  logic [7:0] main_memory [0:`MEM_DEPTH];  // Byte-addressable memory
+ 
+  logic [DWIDTH-1:0] temp_memory [0:`MEM_DEPTH]; // 4 bytes (word addressable because each value is 32 bits
+  logic [7:0] main_memory [0:`MEM_DEPTH];  // Byte-addressable memory because each value is 8 bits
   logic [AWIDTH-1:0] address;
   assign address = addr_i - BASE_ADDR;
 
   initial begin
-    $readmemh(`MEM_PATH, temp_memory);
-    // Load data from temp_memory into main_memory
+    $readmemh(`MEM_PATH, temp_memory); // Load data from temp_memory into main_memory
     for (int i = 0; i < `LINE_COUNT; i++) begin
       main_memory[4*i]     = temp_memory[i][7:0];
       main_memory[4*i + 1] = temp_memory[i][15:8];
@@ -57,4 +55,26 @@ module memory #(
    *
    */
 
+  //Read from Main Memory (triggered when input signals change)
+  always_comb begin
+    //data_o = 32'h0;  // Default value
+    if (read_en_i) begin
+        data_o = {main_memory[address + 3], 
+                  main_memory[address + 2],
+                  main_memory[address + 1], 
+                  main_memory[address]}; 
+    end else begin
+        data_o = '0; 
+    end
+  end
+
+  //Write to memory (positive-edge triggered)
+  always_ff @(posedge clk) begin
+    if (write_en_i) begin
+        main_memory[address] <= data_i[7:0];
+        main_memory[address + 1] <= data_i[15:8];
+        main_memory[address + 2] <= data_i[23:16];
+        main_memory[address + 3] <= data_i[31:24];
+    end
+  end
 endmodule : memory
