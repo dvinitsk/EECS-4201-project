@@ -9,7 +9,7 @@ VCD ?= 0
 
 ifeq ($(VCD), 1)
 VFLAGS+= --trace
-FLAGS+= -DVCD -DVCD_FILE=$(TEST).vcd
+_CFLAGS+= -DVCD -DVCD_FILE=$(TEST).vcd
 endif
 
 ifneq ($(_CFLAGS), )
