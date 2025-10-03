@@ -1,12 +1,12 @@
 // ----  Probes  ----
-`define PROBE_ADDR      mem_addr
-`define PROBE_DATA_IN   mem_data_in
-`define PROBE_DATA_OUT  mem_data_out
-`define PROBE_READ_EN   mem_read_en
-`define PROBE_WRITE_EN  mem_write_en
+`define PROBE_ADDR      f_pc      //addr_i      
+`define PROBE_DATA_IN   data_i    //mem_data_in
+`define PROBE_DATA_OUT  data_o    //mem_data_out
+`define PROBE_READ_EN   read_en   //mem_read_en
+`define PROBE_WRITE_EN  write_en  //mem_write_en
 
-`define PROBE_F_PC      fetch_pc_o
-`define PROBE_F_INSN    fetch_insn_o //or change to mem_data_out 
+`define PROBE_F_PC      f_pc    //fetch_pc_o
+`define PROBE_F_INSN    f_inst  //fetch_insn_o 
 
 // ----  Probes  ----
 

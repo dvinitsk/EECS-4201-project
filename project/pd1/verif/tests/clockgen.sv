@@ -29,11 +29,15 @@ module clockgen(
 
   // logic only for verilator to set clock
   `ifdef VERILATOR
-    function automatic bit toggle_clock (int n);
-      repeat (n) begin
-        clk = clk ^ 1'b1;
-      end
-      return clk;
+    initial begin
+      clk = 0;
+      rst = 1;
+    end
+    export "DPI-C" function toggleClock;
+    function void toggleClock;
+    begin
+      clk = clk ^ 1;
+    end
     endfunction
   `else
     initial begin

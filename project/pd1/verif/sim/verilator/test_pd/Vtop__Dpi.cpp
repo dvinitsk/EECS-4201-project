@@ -17,7 +17,7 @@
 #ifndef VL_DPIDECL_toggleClock_
 #define VL_DPIDECL_toggleClock_
 void toggleClock() {
-    // DPI export at /Users/dvinitsk/workspace/github.com/dvinitsk/EECS-4201-project/project/pd1/verif/tests/clockgen.sv:48:19
+    // DPI export at /Users/dvinitsk/workspace/github.com/dvinitsk/EECS-4201-project/project/pd1/verif/tests/clockgen.sv:37:19
     return Vtop::toggleClock();
 }
 #endif

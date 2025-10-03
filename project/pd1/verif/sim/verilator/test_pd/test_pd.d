@@ -5,6 +5,8 @@ test_pd.o: \
   /usr/local/Cellar/verilator/5.038/share/verilator/include/verilatedos.h \
   /usr/local/Cellar/verilator/5.038/share/verilator/include/verilated_types.h \
   /usr/local/Cellar/verilator/5.038/share/verilator/include/verilated_funcs.h \
+  /usr/local/Cellar/verilator/5.038/share/verilator/include/verilated_vcd_c.h \
+  /usr/local/Cellar/verilator/5.038/share/verilator/include/verilated_trace.h \
   Vtop.h \
   /usr/local/Cellar/verilator/5.038/share/verilator/include/vltstd/svdpi.h \
   Vtop__Dpi.h
